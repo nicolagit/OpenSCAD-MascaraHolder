@@ -1,9 +1,9 @@
 xqty = 5;       // Number of slots on x axis
 yqty = 4;       // Number of slots on y axis
-ystep = 15;     // mm increasing at each y axis
-thick = 2.5;    // thickness of the frame
-edge = 15;      // side of the slot
-height = 30;    // height of the slot
+ystep = 8;      // mm increasing at each y axis
+thick = 2;      // thickness of the frame
+edge = 26;      // side of the slot
+height = 37;    // height of the slot
 
 /* a single module */
 module slot(thick,edge) {
@@ -14,6 +14,11 @@ module slot(thick,edge) {
         }
 }
 
+/* a single support */
+module support() {
+        cube([edge,edge/3,(yqty)*ystep]);
+}
+
 /* modules' ladder */
 for (i=[0:xqty],ii=[0:yqty]) {
         translate([edge*i,edge*ii,ystep*ii])
@@ -21,8 +26,5 @@ for (i=[0:xqty],ii=[0:yqty]) {
 }
 
 /* back side supports */
-module support() {
-        cube([edge,edge/3,(yqty)*ystep]);
-}
 translate([0,yqty*edge,0]) support();
 translate([xqty*edge,yqty*edge,0]) support();
